@@ -1,0 +1,17 @@
+version: '2'
+services:
+    final-app:
+        image: final
+        external_links:
+            - final-mongodb:mongodb
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017
+            - SPRING_DATA_MONGODB_DATABASE=final
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    final-mongodb:
+        extends:
+            file: mongodb.yml
+            service: final-mongodb
